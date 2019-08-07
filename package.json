@@ -2,7 +2,7 @@
   "name": "appointment-api",
   "version": "0.0.1",
   "description": "Generic appointment api",
-  "main": "handler.js",
+  "main": "src/handler.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,6 +15,7 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.17",
     "@types/jsonwebtoken": "^8.3.2",
+    "@types/moment": "^2.13.0",
     "@types/node": "^10.12.18",
     "serverless": "^1.49.0",
     "serverless-offline": "^5.9.0",
