@@ -1,0 +1,32 @@
+{
+  "name": "appointment-api",
+  "version": "0.0.1",
+  "description": "Generic appointment api",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.504.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "source-map-support": "^0.5.10"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.17",
+    "@types/jsonwebtoken": "^8.3.2",
+    "@types/node": "^10.12.18",
+    "serverless": "^1.49.0",
+    "serverless-offline": "^5.9.0",
+    "serverless-webpack": "^5.2.0",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.2.4",
+    "webpack": "^4.29.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/majindageta/appointment-api.git"
+  },
+  "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
+  "license": "MIT"
+}
