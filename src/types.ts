@@ -1,12 +1,24 @@
+import moment from 'moment';
 
+//HANDLER
+export enum PATH {
+    GET, 
+    POST,
+    PUT,
+    PATCH,
+    DELETE
+}
 export interface Context {
-    path: string,
+    path: PATH,
+    resource: string,
     method: string,
     eventId?: string,
-    storeId?: string,
-    jwt?: string
+    vendorId?: string,
+    jwt?: string,
+    day?: moment.Moment
 }
 
+//DB
 export interface Event {
     id: string,
     storeId: string,
@@ -24,4 +36,11 @@ export interface Store {
     defaultDuration: number,
     start: Date,
     end: Date
+}
+
+//DTO
+
+export interface DTOEvent {
+    day: string,
+    events: Event[]
 }
