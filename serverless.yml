@@ -1,5 +1,5 @@
 service:
-  name: aws-nodejs-typescript
+  name: appointment-api
 #app: your-app-name
 #tenant: your-tenant-name
 
@@ -7,14 +7,96 @@ service:
 plugins:
   - serverless-webpack
 
+custom:
+  region: eu-west-1
+  stage: ${opt:stage, self:provider.stage}
+
 provider:
   name: aws
   runtime: nodejs10.x
+  region: ${self:custom.region}
+  profile: personal
+  stage: dev
+  memorySize: 256
+  timeout: 30
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:*"
+      Resource: "*"
+    - Effect: "Allow"
+      Action:
+        - "iam:*"
+      Resource: "*"
+    - Effect: "Allow"
+      Action:
+        - "lambda:*"
+      Resource: "*"
+      #API_GATEWAY
+    - Effect: "Allow"
+      Action:
+        - "execute-api:Invoke"
+        - "execute-api:ManageConnections"
+      Resource: "arn:aws:execute-api:*:*:*"
+
+resources:
+  Resources:
+    apiTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: appointment-api-${self:custom.stage}
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
 
 functions:
-  hello:
+  lambda:
     handler: src/handler.hello
+    description: "Api responder for appointment api - beta"
+    tags:
+      LAMBDA: appointment-api-${self:custom.stage}-lambda
+    environment:
+      STAGE: ${self:custom.stage}
     events:
       - http:
           method: get
-          path: hello
+          path: /events
+      - http:
+          method: get
+          path: /events/{day}
+          request:
+            parameters:
+              paths:
+                day: true
+      - http:
+          method: post
+          path: /events
+      - http:
+          method: get
+          path: /events/{eventId}
+          request:
+            parameters:
+              paths:
+                eventId: true
+      - http:
+          method: put
+          path: /events/{eventId}
+          request:
+            parameters:
+              paths:
+                eventId: true
+      - http:
+          method: delete
+          path: /events/{eventId}
+          request:
+            parameters:
+              paths:
+                eventId: true
+        
