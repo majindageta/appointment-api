@@ -17,3 +17,13 @@ per cercare eventi per un giorno specifico un utente normale cerca per vendor_da
 per creare e modificare stessa cosa + un id evento o autogenerato o passato dal client
 
 COME GESTIRE ADMIN MODE? il token se lo prende dall'evento e lo passa? le chiamate che manda l'admin avranno anche un API KEY?
+
+
+Evento di esempio
+
+{
+    "name": "prova1",
+    "date": "20191013T220111+0200",
+    "duration": 30,
+    "saved": true
+}

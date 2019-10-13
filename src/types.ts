@@ -1,17 +1,18 @@
 import moment from 'moment';
 
 //HANDLER
-export enum PATH {
+export enum METHOD {
     GET, 
     POST,
     PUT,
     PATCH,
-    DELETE
+    DELETE,
+    WRONG_METHOD
 }
 export interface Context {
-    path: PATH,
+    path: string,
     resource: string,
-    method: string,
+    method: METHOD,
     eventId?: string,
     vendorId?: string,
     jwt?: string,
@@ -24,7 +25,7 @@ export interface Event {
     id: string,
     storeId: string,
     name: string,
-    date: Date,
+    date: string,
     duration: number,
     saved: boolean,
     approved: boolean
@@ -35,7 +36,7 @@ export interface Store {
     user: string,
     name: string,
     defaultDuration: number,
-    start: Date,
+    start: string,
     end: Date
 }
 

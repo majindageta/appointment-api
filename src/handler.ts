@@ -17,7 +17,7 @@ export const hello: APIGatewayProxyHandler = async (event, _context) => {
 
 	const context: Context = contextBuilder(event);
 
-	// if (context.path === 'login') {
+	// if (context.method === 'login') {
 	// 	//login
 	// }
 	if (context.resource === '/events') {

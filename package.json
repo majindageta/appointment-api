@@ -4,7 +4,7 @@
   "description": "Generic appointment api",
   "main": "src/handler.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "tsc"
   },
   "dependencies": {
     "aws-sdk": "^2.504.0",

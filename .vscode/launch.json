@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug TypeScript in Node.js",
+            "preLaunchTask": "npm: tsc",
+            "program": "${workspaceFolder}/lib/sample.js",
+            "cwd": "${workspaceFolder}",
+            "outFiles": [
+                "${workspaceFolder}/lib/**/*.js"
+            ],
+            "protocol": "inspector"
+        }
+    ]
+}

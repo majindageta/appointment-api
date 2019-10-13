@@ -32,29 +32,29 @@ export function contextBuilder(proxyEvent: APIGatewayProxyEvent): Types.Context 
     return {
         eventId: checkPath(proxyEvent, 'eventId'),
         jwt: checkHeader(proxyEvent, 'jwt') || jwtMock,
-        method: proxyEvent.httpMethod,
-        path: checkHttpPath(proxyEvent.path),
+        method: checkHttpMethod(proxyEvent.httpMethod),
+        path: proxyEvent.path,
         resource: proxyEvent.resource,
-        vendorId: checkPath(proxyEvent, 'storeId') || storeIdMock,
-        day: moment(checkPath(proxyEvent, 'day'), defaultDateFormat) || moment(),
+        vendorId: checkHeader(proxyEvent, 'storeId') || storeIdMock,
+        day: moment(checkPath(proxyEvent, 'day'), defaultDateFormat) || undefined,
         body: proxyEvent.body
     }
 }
 
-function checkHttpPath(path: string): Types.PATH {
-    switch (path) {
+function checkHttpMethod(method: string): Types.METHOD {
+    switch (method) {
         case 'GET':
-            return Types.PATH.GET;
+            return Types.METHOD.GET;
         case 'POST':
-            return Types.PATH.POST;
+            return Types.METHOD.POST;
         case 'PUT':
-            return Types.PATH.PUT;
+            return Types.METHOD.PUT;
         case 'PATCH':
-            return Types.PATH.PATCH;
+            return Types.METHOD.PATCH;
         case 'DELETE':
-            return Types.PATH.DELETE;
+            return Types.METHOD.DELETE;
         default:
-            return Types.PATH.GET;
+            return Types.METHOD.GET;
     }
 }
 function checkHeader(event: APIGatewayProxyEvent, key: string): string | undefined {

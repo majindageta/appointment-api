@@ -10,14 +10,14 @@ import { deleteSingleEvent } from './methods/delete';
 export default function handler(ddb: AWS.DynamoDB, context: Types.Context): Promise<any> {
     return new Promise((resolve) => {
         if (context.eventId) {
-            if (context.path === Types.PATH.GET) {
+            if (context.method === Types.METHOD.GET) {
                 return getSingleEvent(ddb, context);
             }
-            if (context.path === Types.PATH.PATCH ||
-                context.path === Types.PATH.PUT) {
+            if (context.method === Types.METHOD.PATCH ||
+                context.method === Types.METHOD.PUT) {
                 return postEvent(ddb, context);
             }
-            if (context.path === Types.PATH.DELETE) {
+            if (context.method === Types.METHOD.DELETE) {
                 return deleteSingleEvent(ddb, context);
             }
             return resolve(response(405, 'WRONT PATH - GET, PUT, DELETE, PATCH AVAILABLE'));
