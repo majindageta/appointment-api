@@ -15,7 +15,8 @@ export interface Context {
     eventId?: string,
     vendorId?: string,
     jwt?: string,
-    day?: moment.Moment
+    day?: moment.Moment,
+    body?: any
 }
 
 //DB

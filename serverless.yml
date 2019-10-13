@@ -1,9 +1,6 @@
 service:
   name: appointment-api
-#app: your-app-name
-#tenant: your-tenant-name
-
-# Add the serverless-webpack plugin
+  
 plugins:
   - serverless-webpack
 
@@ -32,7 +29,6 @@ provider:
       Action:
         - "lambda:*"
       Resource: "*"
-      #API_GATEWAY
     - Effect: "Allow"
       Action:
         - "execute-api:Invoke"
@@ -70,7 +66,7 @@ functions:
           path: /events
       - http:
           method: get
-          path: /events/{day}
+          path: /events/day/{day}
           request:
             parameters:
               paths:
@@ -93,10 +89,16 @@ functions:
               paths:
                 eventId: true
       - http:
+          method: patch
+          path: /events/{eventId}
+          request:
+            parameters:
+              paths:
+                eventId: true
+      - http:
           method: delete
           path: /events/{eventId}
           request:
             parameters:
               paths:
                 eventId: true
-        

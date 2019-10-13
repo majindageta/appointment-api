@@ -36,7 +36,8 @@ export function contextBuilder(proxyEvent: APIGatewayProxyEvent): Types.Context 
         path: checkHttpPath(proxyEvent.path),
         resource: proxyEvent.resource,
         vendorId: checkPath(proxyEvent, 'storeId') || storeIdMock,
-        day: moment(checkPath(proxyEvent, 'day'), defaultDateFormat) || moment()
+        day: moment(checkPath(proxyEvent, 'day'), defaultDateFormat) || moment(),
+        body: proxyEvent.body
     }
 }
 

@@ -1,7 +1,10 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import AWS from 'aws-sdk';
+
 import { response, contextBuilder } from './utils';
 import { Context } from './types';
+
+import eventsHandler from './controllers/events/events';
 
 const credentials = new AWS.SharedIniFileCredentials({ profile: 'personal' });
 AWS.config.update({
@@ -20,14 +23,23 @@ export const hello: APIGatewayProxyHandler = async (event, _context) => {
 	if (context.resource === '/events') {
 		//events get e post
 		//get all events
-
 		//post all events
+		return eventsHandler(ddb, context);
 	}
 
-	if (context.resource === '/events/{ID}') {
+	if (context.resource === '/events/day/{day}') {
+		//events get e post
+		if (context.day) {
+			return eventsHandler(ddb, context);
+		} else {
+			return response(404, 'No event id passed');
+		}
+	}
+
+	if (context.resource === '/events/{eventId}') {
 		//events get e post
 		if (context.eventId) {
-
+			return eventsHandler(ddb, context);
 		} else {
 			return response(404, 'No event id passed');
 		}
