@@ -11,7 +11,10 @@
             "outFiles": [
                 "${workspaceFolder}/lib/**/*.js"
             ],
-            "protocol": "inspector"
+            "protocol": "inspector",
+            "env": {
+                "DEBUG":"true"
+            }
         }
     ]
 }

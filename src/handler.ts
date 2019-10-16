@@ -9,7 +9,7 @@ import eventsHandler from './controllers/events/events';
 const credentials = new AWS.SharedIniFileCredentials({ profile: 'personal' });
 AWS.config.update({
 	region: 'eu-west-1',
-	credentials: credentials,
+	credentials: process.env.DEBUG === 'true' ? credentials : undefined,
 });
 const ddb = new AWS.DynamoDB();
 

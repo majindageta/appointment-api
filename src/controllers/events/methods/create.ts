@@ -8,7 +8,7 @@ import moment from 'moment';
 export function postEvent(ddb: AWS.DynamoDB, context: Types.Context): Promise<any> {
     return new Promise((resolve) => {
         const eventToCreate = context.body as Types.Event;
-        const momentDate = moment(eventToCreate.date)
+        const momentDate = moment(eventToCreate.date);
         if (momentDate) {
             eventToCreate.id = uuid.v4();
             const PK: string = context.vendorId + '_' + momentDate.format(defaultDateFormat);
@@ -18,7 +18,7 @@ export function postEvent(ddb: AWS.DynamoDB, context: Types.Context): Promise<an
                 Item: AWS.DynamoDB.Converter.marshall({
                     PK: PK,
                     SK: SK,
-                    eventToCreate
+                    ...eventToCreate
                 }),
                 ReturnValues: 'ALL_OLD',
                 ReturnConsumedCapacity: 'TOTAL'
@@ -30,6 +30,6 @@ export function postEvent(ddb: AWS.DynamoDB, context: Types.Context): Promise<an
                 return resolve(response(500, 'Error creating event', err));
             });
         }
-        return resolve(response(405, 'No day passed in body'));
+        else return resolve(response(405, 'No day passed in body: ' + moment(eventToCreate.date).toDate().toISOString()));
     })
 }

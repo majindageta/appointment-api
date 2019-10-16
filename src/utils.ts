@@ -29,6 +29,10 @@ export function contextBuilder(proxyEvent: APIGatewayProxyEvent): Types.Context 
     const storeIdMock = 'BARBIERE';
     //JWT not present, no logic added to create user
     const jwtMock = hash({tel: '123', device: 'asd'});
+    let day = undefined;
+    if (checkPath(proxyEvent, 'day')) {
+        day = moment(checkPath(proxyEvent, 'day'), defaultDateFormat);
+    }
     return {
         eventId: checkPath(proxyEvent, 'eventId'),
         jwt: checkHeader(proxyEvent, 'jwt') || jwtMock,
@@ -36,8 +40,8 @@ export function contextBuilder(proxyEvent: APIGatewayProxyEvent): Types.Context 
         path: proxyEvent.path,
         resource: proxyEvent.resource,
         vendorId: checkHeader(proxyEvent, 'storeId') || storeIdMock,
-        day: moment(checkPath(proxyEvent, 'day'), defaultDateFormat) || undefined,
-        body: proxyEvent.body
+        day: day,
+        body: JSON.parse(proxyEvent.body)
     }
 }
 
