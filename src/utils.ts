@@ -33,6 +33,7 @@ export function contextBuilder(proxyEvent: APIGatewayProxyEvent): Types.Context 
     if (checkPath(proxyEvent, 'day')) {
         day = moment(checkPath(proxyEvent, 'day'), defaultDateFormat);
     }
+    let interval = parseInt(checkQueryString(proxyEvent, 'interval'));
     return {
         eventId: checkPath(proxyEvent, 'eventId'),
         jwt: checkHeader(proxyEvent, 'jwt') || jwtMock,
@@ -41,7 +42,8 @@ export function contextBuilder(proxyEvent: APIGatewayProxyEvent): Types.Context 
         resource: proxyEvent.resource,
         vendorId: checkHeader(proxyEvent, 'storeId') || storeIdMock,
         day: day,
-        body: JSON.parse(proxyEvent.body)
+        body: JSON.parse(proxyEvent.body),
+        interval: interval
     }
 }
 

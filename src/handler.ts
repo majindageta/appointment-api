@@ -27,21 +27,27 @@ export const hello: APIGatewayProxyHandler = async (event, _context) => {
 		return eventsHandler(ddb, context);
 	}
 
-	if (context.resource === '/events/day/{day}') {
+	if (context.resource === '/events/{day}') {
 		//events get e post
 		if (context.day) {
+			if (!context.day.isValid()) response(422, 'Day is not valid')
 			return eventsHandler(ddb, context);
 		} else {
-			return response(404, 'No event id passed');
+			return response(404, 'No event day passed');
 		}
 	}
 
-	if (context.resource === '/events/{eventId}') {
+	if (context.resource === '/events/{day}/{eventId}') {
 		//events get e post
 		if (context.eventId) {
-			return eventsHandler(ddb, context);
+			if (context.day) {
+				if (!context.day.isValid()) response(422, 'Day is not valid')
+				return eventsHandler(ddb, context);
+			} else {
+				return response(406, 'No event day passed');
+			}
 		} else {
-			return response(404, 'No event id passed');
+			return response(406, 'No event id passed');
 		}
 	}
 
@@ -77,5 +83,5 @@ export const hello: APIGatewayProxyHandler = async (event, _context) => {
 	// when an event is created, a trigger on dynamo will "trigger" a notification to the store owner 
 
 
-	return response(200, 'OK');
+	return response(404, 'WRONG PATH');
 }

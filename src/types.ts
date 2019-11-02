@@ -17,7 +17,8 @@ export interface Context {
     vendorId?: string,
     jwt?: string,
     day?: moment.Moment,
-    body?: any
+    body?: any,
+    interval?: number //interval of events: 1 day, 7 days (week), 30 (month)
 }
 
 //DB

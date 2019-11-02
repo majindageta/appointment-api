@@ -64,44 +64,98 @@ functions:
     environment:
       STAGE: ${self:custom.stage}
     events:
+
       - http:
           method: get
           path: /events
       - http:
+          method: post
+          path: /events
+
+      - http:
           method: get
-          path: /events/day/{day}
+          path: /events/{day}
           request:
             parameters:
               paths:
                 day: true
       - http:
-          method: post
-          path: /events
-      - http:
           method: get
           path: /events/{eventId}
           request:
             parameters:
               paths:
                 eventId: true
+                day: true
       - http:
           method: put
-          path: /events/{eventId}
+          path: /events/{day}/{eventId}
           request:
             parameters:
               paths:
                 eventId: true
+                day: true
       - http:
           method: patch
-          path: /events/{eventId}
+          path: /events/{day}/{eventId}
           request:
             parameters:
               paths:
                 eventId: true
+                day: true
       - http:
           method: delete
-          path: /events/{eventId}
+          path: /events/{day}/{eventId}
           request:
             parameters:
               paths:
                 eventId: true
+                day: true
+
+
+      - http:
+          method: get
+          path: admin/events
+      - http:
+          method: post
+          path: admin/events
+
+      - http:
+          method: get
+          path: admin/events/{day}
+          request:
+            parameters:
+              paths:
+                day: true
+      - http:
+          method: get
+          path: admin/events/{eventId}
+          request:
+            parameters:
+              paths:
+                eventId: true
+                day: true
+      - http:
+          method: put
+          path: admin/events/{day}/{eventId}
+          request:
+            parameters:
+              paths:
+                eventId: true
+                day: true
+      - http:
+          method: patch
+          path: admin/events/{day}/{eventId}
+          request:
+            parameters:
+              paths:
+                eventId: true
+                day: true
+      - http:
+          method: delete
+          path: admin/events/{day}/{eventId}
+          request:
+            parameters:
+              paths:
+                eventId: true
+                day: true

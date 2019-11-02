@@ -1,8 +1,4 @@
 import { hello } from './handler';
-import moment = require('moment');
-
-
-const prova = moment('20191013T220111+0200');
 
 const event: any = {"resource":"/events", "body":
 JSON.stringify({
