@@ -1,20 +1,30 @@
 {
-  "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "lib": ["es2015", "es2016", "dom", "es2017", "es6", "es5"],
-      "esModuleInterop": true,
-      "noImplicitAny": true,
-      "moduleResolution": "node",
-      "sourceMap": true,
-      "outDir": "lib",
-      "baseUrl": ".",
-      "typeRoots" : ["./node_modules/@types", "./typings"]
-  },
-  "include": [
-      "src/**/*"
-  ],
-  "exclude": [
-      "node_modules"
-  ],
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "lib": [
+            "es2015",
+            "es2016",
+            "dom",
+            "es2017",
+            "es6",
+            "es5"
+        ],
+        "esModuleInterop": true,
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "lib",
+        "baseUrl": ".",
+        "typeRoots": [
+            "./node_modules/@types",
+            "./typings"
+        ]
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ],
 }
